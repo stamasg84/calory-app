@@ -1,4 +1,8 @@
+using Core.Interfaces;
+using Core.Model;
+using DataAccess;
 using DataAccess.EFDataAccess;
+using Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +26,9 @@ namespace CaloryAPI
         {
             services.AddControllers();
             services.AddDbContext<CaloryDbContext>(options => { options.UseSqlite(Configuration.GetConnectionString("sqliteconn")); });
+
+            services.AddScoped<IRepository<Meal>, Repository<Meal>>();
+            services.AddScoped<IMealsService, MealsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

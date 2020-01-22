@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Core.Interfaces;
+using Core.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaloryAPI.Controllers
@@ -6,16 +9,28 @@ namespace CaloryAPI.Controllers
     [ApiController]
     [Route("[controller]")]
     public class MealsController : ControllerBase
-    {      
-        public MealsController()
+    {
+        private readonly IMealsService mealsService;
+
+        public MealsController(IMealsService mealsService)
         {
-            
+            this.mealsService = mealsService;
         }
 
         [HttpGet]
-        public IEnumerable<Meal> Get()
+        public IEnumerable<Meal> Get([FromQuery]DateTime? date)
         {
-            return new[] { new Meal() };
+            return mealsService.GetMeals(date);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Meal meal)
+        {
+            //we'll go with automatic modelstate validation          
+
+            mealsService.CreateMeals(new[] { meal });
+
+            return Ok();
         }
     }
 }
