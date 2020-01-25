@@ -9,5 +9,7 @@ namespace Core.Interfaces
         public void CreateMeals(IEnumerable<Meal> meals);
 
         public List<Meal> GetMeals(DateTime? dateFilter = null);
+
+        Meal Get(int id);
     }
 }

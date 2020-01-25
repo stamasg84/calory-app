@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Core.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaloryAPI.Controllers
@@ -16,6 +17,8 @@ namespace CaloryAPI.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get([FromQuery]string resource, [FromQuery]string field, [FromQuery] string filter)
         {
             if(string.IsNullOrEmpty(resource) || string.IsNullOrEmpty(field))

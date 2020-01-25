@@ -3,6 +3,7 @@ using Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Logic
@@ -53,6 +54,11 @@ namespace Logic
             }
 
             return repository.Get();
+        }
+
+        public Meal Get(int id)
+        {
+            return repository.Get(m => m.Id == id).FirstOrDefault();
         }
 
         public bool IsValidFieldName(string fieldName)
