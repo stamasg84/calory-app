@@ -36,5 +36,17 @@ namespace DataAccess
             }
             return result.ToList();
         }
+
+        public int Sum(Expression<Func<TEntity, int>> fieldSelector, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> entities = dbContext.Set<TEntity>();
+
+            if (filter != null)
+            {
+                entities = entities.Where(filter);
+            }
+
+            return entities.Sum(fieldSelector);
+        }
     }
 }

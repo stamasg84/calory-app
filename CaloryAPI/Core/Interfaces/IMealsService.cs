@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Core.Interfaces
 {
-    public interface IMealsService
+    public interface IMealsService : IAggregatorService
     {
         public void CreateMeals(IEnumerable<Meal> meals);
 
